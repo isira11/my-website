@@ -1,46 +1,57 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { StaticQuery, graphql } from "gatsby"
-
-import Header from "./header"
-import "./layout.css"
-
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
-      <>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <div
-          style={{
-            margin: `0 auto`,
-            maxWidth: 960,
-            padding: `0px 1.0875rem 1.45rem`,
-            paddingTop: 0,
-          }}
-        >
-          <main>{children}</main>
-          <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>
-        </div>
-      </>
-    )}
-  />
-)
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+import React, { Component } from 'react'
+import { styled, createGlobalStyle, ThemeProvider } from 'styled-components';
+import { MainContainer } from '../components/container'
+import { ScrollingProvider } from 'react-scroll-section';
+import Load from '../sections/loadingScreen'
+const GlobalStyle = createGlobalStyle`
+html {
+  box-sizing: border-box;
+  width: 100%;
 }
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  
+}
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  background-color: #330a42;
 
-export default Layout
+`;
+
+class Layout extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isWelcome:props.Welcome,
+      isLoading: true,
+    }
+  }
+
+  finishedLoading = () => {
+    this.setState({ isLoading: false })
+  }
+  componentDidMount(){
+    //this.setState({isLoading: false})
+  }
+
+  render() {
+    const { children } = this.props;
+    const { isLoading } = this.state;
+    return (
+      <div>
+        <GlobalStyle />
+        {(isLoading && this.state.isWelcome) ? (
+          <Load finishLoading={this.finishedLoading} />
+        ) : (<ScrollingProvider>
+          {children}
+        </ScrollingProvider>)}
+      </div>
+    )
+  }
+};
+export default Layout;
