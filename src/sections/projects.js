@@ -81,7 +81,7 @@ const Projects = () => (
         const projects = data.allMarkdownRemark.edges.map((p, i) => {
           const {title}= p.node.frontmatter;
           return (
-            <Card key={i} p={0} >
+            <Card key={i} p={0} color='blue'>
             <Heading color='purple'>Project: {i+1}</Heading>
             <Flex flexDirection='column'>
               <Flex>
