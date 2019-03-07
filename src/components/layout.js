@@ -35,10 +35,7 @@ class Layout extends Component {
   finishedLoading = () => {
     this.setState({ isLoading: false })
   }
-  componentDidMount(){
-    //this.setState({isLoading: false})
-  }
-
+  
   render() {
     const { children } = this.props;
     const { isLoading } = this.state;

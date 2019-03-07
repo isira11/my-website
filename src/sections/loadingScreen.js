@@ -9,11 +9,6 @@ class Load extends Component {
 
     }
 
-    finishLoading(){
-       
-
-
-    }
     componentDidMount(){
         this.animate()
     }

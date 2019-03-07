@@ -34,7 +34,7 @@ export default ({ data }) => {
         <br/>
         <Text color='red'>routes.get({post.frontmatter.title})</Text>
         <br/>
-        <Link to='/' state={{}}>back</Link>
+        <Link to='/' state={{}}>back.</Link>
       </div>
     </Container>
     </Flip>
